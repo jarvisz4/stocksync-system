@@ -1,6 +1,15 @@
 # StockSync: Premium Inventory & Order Management System
 
+## 🌐 Live Production URLs
+Quickly access the running cloud application through these public links:
+- **Interactive Live Dashboard (Vercel):** [https://stocksync-system.vercel.app](https://stocksync-system.vercel.app)
+- **Active Backend API (Render):** [https://stocksync-api-un68.onrender.com](https://stocksync-api-un68.onrender.com)
+- **Interactive REST Swagger Docs:** [https://stocksync-api-un68.onrender.com/docs](https://stocksync-api-un68.onrender.com/docs)
+
+---
+
 StockSync is a production-ready, full-stack **Inventory & Order Management System** built with **FastAPI (Python)**, **React.js (Vite)**, and **PostgreSQL**. 
+
 
 It implements high-end aesthetics (sleek dark mode glassmorphism panels, harmonious HSL palettes, and fluid CSS transitions), relational database transactions, strict stock validations, and orchestrates seamlessly under **Docker Compose**.
 
