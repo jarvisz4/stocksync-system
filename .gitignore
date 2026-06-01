@@ -1,15 +1,17 @@
 # Python virtual envs and compiled files
-backend/__pycache__/
-backend/*.pyc
-backend/.venv/
-backend/venv/
-backend/env/
-backend/app/inventory.db
-backend/app/inventory.db-journal
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.venv/
+venv/
+env/
+**/*.db
+**/*.db-journal
 
 # Node dependencies and build artifacts
-frontend/node_modules/
-frontend/dist/
+**/node_modules/
+**/dist/
 frontend/.env
 frontend/.env.local
 
