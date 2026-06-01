@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Database Service (PostgreSQL 15)
+  db:
+    image: postgres:15-alpine
+    container_name: stocksync-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: inventory_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d inventory_db"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  # REST API Service (FastAPI)
+  backend:
+    build: ./backend
+    container_name: stocksync-backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/inventory_db
+      POSTGRES_DB: inventory_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Frontend Service (Vite + React Dashboard)
+  frontend:
+    build: ./frontend
+    container_name: stocksync-frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    # Mounting volumes enables hot-reloading for local code editing
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+# Named volumes for postgres data persistence
+volumes:
+  pgdata:
